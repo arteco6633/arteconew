@@ -1,0 +1,77 @@
+[
+  {
+    "id": "1",
+    "name": "Лёгкая рубашка с цветочным принтом",
+    "price": 113100,
+    "image": "/images/product1.jpg",
+    "category": "рубашки",
+    "isBestseller": true,
+    "createdAt": "2026-01-13T13:29:48.007Z",
+    "updatedAt": "2026-01-13T13:29:48.007Z"
+  },
+  {
+    "id": "2",
+    "name": "Серые шерстяные брюки с защипами",
+    "price": 140300,
+    "image": "/images/product2.jpg",
+    "category": "брюки",
+    "isBestseller": true,
+    "createdAt": "2026-01-13T13:29:48.008Z",
+    "updatedAt": "2026-01-13T13:29:48.008Z"
+  },
+  {
+    "id": "3",
+    "name": "Корсетный чёрный топ с кружевом",
+    "price": 90300,
+    "originalPrice": 120000,
+    "image": "/images/product3.jpg",
+    "category": "футболки",
+    "createdAt": "2026-01-13T13:29:48.008Z",
+    "updatedAt": "2026-01-13T13:29:48.008Z"
+  },
+  {
+    "id": "4",
+    "name": "Элегантное белое платье с чёрным бантом",
+    "price": 230000,
+    "image": "/images/product4.jpg",
+    "category": "платья",
+    "createdAt": "2026-01-13T13:29:48.008Z",
+    "updatedAt": "2026-01-13T13:29:48.008Z"
+  },
+  {
+    "id": "5",
+    "name": "Шёлковая рубашка пастельного оттенка",
+    "price": 110900,
+    "image": "/images/product5.jpg",
+    "category": "рубашки",
+    "createdAt": "2026-01-13T13:29:48.008Z",
+    "updatedAt": "2026-01-13T13:29:48.008Z"
+  },
+  {
+    "id": "6",
+    "name": "Широкие голубые брюки с защипами",
+    "price": 160000,
+    "image": "/images/product6.jpg",
+    "category": "брюки",
+    "createdAt": "2026-01-13T13:29:48.008Z",
+    "updatedAt": "2026-01-13T13:29:48.008Z"
+  },
+  {
+    "id": "7",
+    "name": "Лонгслив с открытыми плечами в молочном оттенке",
+    "price": 210300,
+    "image": "/images/product7.jpg",
+    "category": "худи",
+    "createdAt": "2026-01-13T13:29:48.008Z",
+    "updatedAt": "2026-01-13T13:29:48.008Z"
+  },
+  {
+    "id": "8",
+    "name": "Нежный голубой топ-сетка",
+    "price": 160900,
+    "image": "/images/product8.jpg",
+    "category": "футболки",
+    "createdAt": "2026-01-13T13:29:48.008Z",
+    "updatedAt": "2026-01-13T13:29:48.008Z"
+  }
+]

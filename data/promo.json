@@ -1,0 +1,11 @@
+[
+  {
+    "id": "1",
+    "title": "shop the look",
+    "image": "/images/promo1.jpg",
+    "isActive": true,
+    "order": 1,
+    "createdAt": "2026-01-13T13:29:48.008Z",
+    "updatedAt": "2026-01-13T13:29:48.008Z"
+  }
+]
