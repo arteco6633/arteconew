@@ -145,3 +145,17 @@ export async function deletePromoBlock(id: string): Promise<boolean> {
   }
   return Promise.resolve(fsData.deletePromoBlock(id))
 }
+
+// Функция для подписки на рассылку
+export async function subscribeToNewsletter(email: string): Promise<boolean> {
+  const dbType = getDatabaseType()
+  if (dbType === 'supabase') {
+    try {
+      return await dbSupabase.subscribeToNewsletter(email)
+    } catch (error) {
+      console.error('Supabase error, falling back to file system:', error)
+      return Promise.resolve(fsData.subscribeToNewsletter(email))
+    }
+  }
+  return Promise.resolve(fsData.subscribeToNewsletter(email))
+}
