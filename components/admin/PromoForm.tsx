@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { PromoBlock } from '@/types'
+import ImageUpload from './ImageUpload'
 
 interface PromoFormProps {
   promo?: PromoBlock | null
@@ -98,32 +99,12 @@ export default function PromoForm({ promo, onSuccess, onCancel }: PromoFormProps
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Изображение (URL) *
-          </label>
-          <input
-            type="url"
+          <ImageUpload
             value={formData.image}
-            onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+            onChange={(url) => setFormData({ ...formData, image: url })}
+            label="Изображение"
             required
-            placeholder="https://example.com/image.jpg"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
           />
-          {formData.image && (
-            <div className="mt-2">
-              <p className="text-xs text-gray-500 mb-1">Превью:</p>
-              <div className="relative w-full h-48 border border-gray-300 rounded-md overflow-hidden">
-                <img
-                  src={formData.image}
-                  alt="Превью"
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none'
-                  }}
-                />
-              </div>
-            </div>
-          )}
         </div>
 
         <div>

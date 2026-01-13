@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Product } from '@/types'
+import ImageUpload from './ImageUpload'
 
 interface ProductFormProps {
   product?: Product | null
@@ -120,15 +121,11 @@ export default function ProductForm({ product, onSuccess, onCancel }: ProductFor
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Изображение (URL) *
-          </label>
-          <input
-            type="url"
+          <ImageUpload
             value={formData.image}
-            onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+            onChange={(url) => setFormData({ ...formData, image: url })}
+            label="Изображение"
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
           />
         </div>
 
