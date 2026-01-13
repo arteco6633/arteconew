@@ -61,6 +61,9 @@ async function testConnection() {
     console.error('1. Правильность DATABASE_URL в .env')
     console.error('2. Доступность базы данных с этого сервера')
     console.error('3. Правильность пароля (символ @ должен быть экранирован как %40)')
+    console.error('\n💡 Попробуйте использовать публичный хост вместо приватного IP:')
+    console.error('   DATABASE_URL=postgresql://arteco:8926416Salavat1996s%40@jogelfilulmir.beget.app:5432/arteco_db')
+    console.error('   DATABASE_SSL=true')
     process.exit(1)
   }
 }
