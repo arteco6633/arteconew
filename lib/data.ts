@@ -4,7 +4,7 @@ import * as dbPg from './db-pg'
 import * as fsData from './data-fs'
 
 // Определяем, использовать ли БД или файловую систему
-const useDatabase = () => {
+const getDatabaseType = () => {
   // Приоритет: PostgreSQL напрямую > Supabase > файловая система
   if (process.env.DATABASE_URL) {
     return 'pg' // Прямое подключение к PostgreSQL
@@ -20,7 +20,7 @@ const useDatabase = () => {
 
 // Функции для работы с товарами
 export async function getProducts(category?: string): Promise<Product[]> {
-  const dbType = useDatabase()
+  const dbType = getDatabaseType()
   if (dbType === 'pg') {
     try {
       return await dbPg.getProducts(category)
@@ -41,7 +41,7 @@ export async function getProducts(category?: string): Promise<Product[]> {
 }
 
 export async function getProductById(id: string): Promise<Product | null> {
-  const dbType = useDatabase()
+  const dbType = getDatabaseType()
   if (dbType === 'pg') {
     try {
       return await dbPg.getProductById(id)
@@ -62,7 +62,7 @@ export async function getProductById(id: string): Promise<Product | null> {
 }
 
 export async function createProduct(product: Omit<Product, 'id' | 'createdAt' | 'updatedAt'>): Promise<Product> {
-  const dbType = useDatabase()
+  const dbType = getDatabaseType()
   if (dbType === 'pg') {
     try {
       return await dbPg.createProduct(product)
@@ -83,7 +83,7 @@ export async function createProduct(product: Omit<Product, 'id' | 'createdAt' | 
 }
 
 export async function updateProduct(id: string, updates: Partial<Product>): Promise<Product | null> {
-  const dbType = useDatabase()
+  const dbType = getDatabaseType()
   if (dbType === 'pg') {
     try {
       return await dbPg.updateProduct(id, updates)
@@ -104,7 +104,7 @@ export async function updateProduct(id: string, updates: Partial<Product>): Prom
 }
 
 export async function deleteProduct(id: string): Promise<boolean> {
-  const dbType = useDatabase()
+  const dbType = getDatabaseType()
   if (dbType === 'pg') {
     try {
       return await dbPg.deleteProduct(id)
@@ -126,7 +126,7 @@ export async function deleteProduct(id: string): Promise<boolean> {
 
 // Функции для работы с промо-блоками
 export async function getPromoBlocks(): Promise<PromoBlock[]> {
-  const dbType = useDatabase()
+  const dbType = getDatabaseType()
   if (dbType === 'pg') {
     try {
       return await dbPg.getPromoBlocks()
@@ -147,7 +147,7 @@ export async function getPromoBlocks(): Promise<PromoBlock[]> {
 }
 
 export async function getPromoBlockById(id: string): Promise<PromoBlock | null> {
-  const dbType = useDatabase()
+  const dbType = getDatabaseType()
   if (dbType === 'pg') {
     try {
       return await dbPg.getPromoBlockById(id)
@@ -168,7 +168,7 @@ export async function getPromoBlockById(id: string): Promise<PromoBlock | null> 
 }
 
 export async function createPromoBlock(block: Omit<PromoBlock, 'id' | 'createdAt' | 'updatedAt'>): Promise<PromoBlock> {
-  const dbType = useDatabase()
+  const dbType = getDatabaseType()
   if (dbType === 'pg') {
     try {
       return await dbPg.createPromoBlock(block)
@@ -189,7 +189,7 @@ export async function createPromoBlock(block: Omit<PromoBlock, 'id' | 'createdAt
 }
 
 export async function updatePromoBlock(id: string, updates: Partial<PromoBlock>): Promise<PromoBlock | null> {
-  const dbType = useDatabase()
+  const dbType = getDatabaseType()
   if (dbType === 'pg') {
     try {
       return await dbPg.updatePromoBlock(id, updates)
@@ -210,7 +210,7 @@ export async function updatePromoBlock(id: string, updates: Partial<PromoBlock>)
 }
 
 export async function deletePromoBlock(id: string): Promise<boolean> {
-  const dbType = useDatabase()
+  const dbType = getDatabaseType()
   if (dbType === 'pg') {
     try {
       return await dbPg.deletePromoBlock(id)
