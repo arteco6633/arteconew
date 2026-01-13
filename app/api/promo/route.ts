@@ -3,7 +3,7 @@ import { getPromoBlocks, createPromoBlock } from '@/lib/data'
 
 export async function GET(request: NextRequest) {
   try {
-    const blocks = getPromoBlocks()
+    const blocks = await getPromoBlocks()
     return NextResponse.json(blocks)
   } catch (error) {
     console.error('Ошибка получения промо-блоков:', error)
@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const block = createPromoBlock({
+    const block = await createPromoBlock({
       title,
       subtitle,
       image,

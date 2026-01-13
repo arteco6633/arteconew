@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams
     const category = searchParams.get('category') || undefined
 
-    const products = getProducts(category)
+    const products = await getProducts(category)
     return NextResponse.json(products)
   } catch (error) {
     console.error('Ошибка получения товаров:', error)
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const product = createProduct({
+    const product = await createProduct({
       name,
       price: Number(price),
       originalPrice: originalPrice ? Number(originalPrice) : undefined,

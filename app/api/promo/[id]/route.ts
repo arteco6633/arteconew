@@ -6,7 +6,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const block = getPromoBlockById(params.id)
+    const block = await getPromoBlockById(params.id)
     if (!block) {
       return NextResponse.json({ error: 'Промо-блок не найден' }, { status: 404 })
     }
@@ -23,7 +23,7 @@ export async function PUT(
 ) {
   try {
     const body = await request.json()
-    const block = updatePromoBlock(params.id, body)
+    const block = await updatePromoBlock(params.id, body)
     
     if (!block) {
       return NextResponse.json({ error: 'Промо-блок не найден' }, { status: 404 })
@@ -41,7 +41,7 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    const deleted = deletePromoBlock(params.id)
+    const deleted = await deletePromoBlock(params.id)
     if (!deleted) {
       return NextResponse.json({ error: 'Промо-блок не найден' }, { status: 404 })
     }
