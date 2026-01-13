@@ -9,8 +9,8 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col">
       <Header />
-      {/* Отступ для fixed хэдера */}
-      <div className="pt-32">
+      {/* Отступ для fixed хэдера (h-20 + h-12 = 128px) */}
+      <div className="pt-[128px]">
         <PromoBanner />
         <Bestsellers />
         <Catalog />
