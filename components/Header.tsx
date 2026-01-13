@@ -91,8 +91,8 @@ export default function Header() {
       {/* Навигационная панель */}
       <div className="border-b" style={{ borderColor: '#3a3d43' }}>
         <div className="w-full px-4 sm:px-6 lg:px-8 relative">
-          <div className="flex items-center justify-center h-12">
-            {/* Навигация по центру */}
+          <div className="flex items-center justify-between h-12">
+            {/* Навигация слева */}
             <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6">
               <Link href="/" className="text-sm text-white hover:opacity-70 transition-opacity whitespace-nowrap no-underline">
                 Каталог
