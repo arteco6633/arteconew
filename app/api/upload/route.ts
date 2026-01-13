@@ -1,10 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { writeFile, mkdir } from 'fs/promises'
-import { join } from 'path'
-import { existsSync } from 'fs'
+import { createClient } from '@supabase/supabase-js'
 
 export async function POST(request: NextRequest) {
   try {
+    // Проверяем наличие Supabase ключей
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+    if (!supabaseUrl || !supabaseServiceKey) {
+      return NextResponse.json(
+        { error: 'Supabase не настроен. Проверьте переменные окружения.' },
+        { status: 500 }
+      )
+    }
+
+    // Создаем Supabase клиент с service role key для загрузки файлов
+    const supabase = createClient(supabaseUrl, supabaseServiceKey)
+
     const formData = await request.formData()
     const file = formData.get('file') as File
 
@@ -33,31 +45,43 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Создаем директорию для загрузок, если её нет
-    const uploadsDir = join(process.cwd(), 'public', 'images', 'uploads')
-    if (!existsSync(uploadsDir)) {
-      await mkdir(uploadsDir, { recursive: true })
-    }
-
     // Генерируем уникальное имя файла
     const timestamp = Date.now()
     const randomString = Math.random().toString(36).substring(2, 15)
     const extension = file.name.split('.').pop()
     const filename = `${timestamp}-${randomString}.${extension}`
-    const filepath = join(uploadsDir, filename)
+    const filePath = `uploads/${filename}`
 
-    // Сохраняем файл
+    // Конвертируем файл в ArrayBuffer
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
-    await writeFile(filepath, buffer)
 
-    // Возвращаем URL файла
-    const fileUrl = `/images/uploads/${filename}`
+    // Загружаем файл в Supabase Storage
+    const { data, error } = await supabase.storage
+      .from('images')
+      .upload(filePath, buffer, {
+        contentType: file.type,
+        upsert: false,
+      })
+
+    if (error) {
+      console.error('Ошибка загрузки в Supabase Storage:', error)
+      return NextResponse.json(
+        { error: `Ошибка загрузки файла: ${error.message}` },
+        { status: 500 }
+      )
+    }
+
+    // Получаем публичный URL файла
+    const { data: urlData } = supabase.storage
+      .from('images')
+      .getPublicUrl(filePath)
 
     return NextResponse.json({
       success: true,
-      url: fileUrl,
+      url: urlData.publicUrl,
       filename: filename,
+      path: filePath,
     })
   } catch (error) {
     console.error('Ошибка загрузки файла:', error)
