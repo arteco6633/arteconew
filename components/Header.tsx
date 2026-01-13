@@ -40,12 +40,12 @@ export default function Header() {
 
   return (
     <header 
-      className={`bg-gray-800 text-white w-full fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${
+      className={`bg-gray-900 text-white w-full fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${
         isVisible ? 'translate-y-0' : '-translate-y-full'
       }`}
     >
       {/* Верхняя полоса с логотипом и иконками */}
-      <div className="border-b border-gray-700">
+      <div className="border-b border-gray-800">
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Логотип */}
@@ -88,7 +88,7 @@ export default function Header() {
       </div>
 
       {/* Навигационная панель */}
-      <div className="border-b border-gray-700">
+      <div className="border-b border-gray-800">
         <div className="w-full px-4 sm:px-6 lg:px-8 relative">
           <div className="flex items-center justify-center h-12">
             {/* Навигация по центру */}
@@ -136,7 +136,7 @@ export default function Header() {
 
       {/* Мобильное меню */}
       {isMenuOpen && (
-        <nav className="lg:hidden bg-gray-800 border-t border-gray-700">
+        <nav className="lg:hidden bg-gray-900 border-t border-gray-800">
           <div className="px-4 py-4 space-y-3">
             <Link 
               href="/" 
