@@ -11,6 +11,7 @@ if (!fs.existsSync(dataDir)) {
 
 const productsFile = path.join(dataDir, 'products.json')
 const promoFile = path.join(dataDir, 'promo.json')
+const newsletterFile = path.join(dataDir, 'newsletter.json')
 
 // Инициализация файлов с тестовыми данными, если их нет
 function initDataFiles() {
@@ -108,6 +109,10 @@ function initDataFiles() {
       },
     ]
     fs.writeFileSync(promoFile, JSON.stringify(initialPromo, null, 2))
+  }
+
+  if (!fs.existsSync(newsletterFile)) {
+    fs.writeFileSync(newsletterFile, JSON.stringify([], null, 2))
   }
 }
 
@@ -228,4 +233,26 @@ export function deletePromoBlock(id: string): boolean {
 
   fs.writeFileSync(promoFile, JSON.stringify(filtered, null, 2))
   return true
+}
+
+// Функция для подписки на рассылку
+export function subscribeToNewsletter(email: string): boolean {
+  try {
+    initDataFiles()
+    const data = fs.readFileSync(newsletterFile, 'utf-8')
+    const subscriptions: string[] = JSON.parse(data)
+
+    // Проверяем, не подписан ли уже этот email
+    if (subscriptions.includes(email)) {
+      return true // Уже подписан
+    }
+
+    // Добавляем email
+    subscriptions.push(email)
+    fs.writeFileSync(newsletterFile, JSON.stringify(subscriptions, null, 2))
+    return true
+  } catch (error) {
+    console.error('Ошибка подписки на рассылку:', error)
+    return false
+  }
 }
