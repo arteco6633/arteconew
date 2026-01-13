@@ -35,43 +35,61 @@ export default function PromoBanner() {
   return (
     <section className="w-full">
       {promoBlocks.map((promo) => (
-        <div key={promo.id} className="relative w-full h-[400px] md:h-[500px]">
+        <div key={promo.id} className="relative w-full h-[70vh] min-h-[600px] max-h-[900px]">
           {promo.link ? (
-            <Link href={promo.link}>
+            <Link href={promo.link} className="block w-full h-full">
               <Image
                 src={promo.image}
                 alt={promo.title}
                 fill
                 className="object-cover"
                 priority
+                sizes="100vw"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
-                <div className="text-center text-white px-4">
-                  <h2 className="text-3xl md:text-5xl font-bold mb-2">{promo.title}</h2>
-                  {promo.subtitle && (
-                    <p className="text-lg md:text-xl">{promo.subtitle}</p>
-                  )}
+              {(promo.title || promo.subtitle) && (
+                <div className="absolute inset-0 flex items-end justify-center pb-12 md:pb-20">
+                  <div className="text-center text-white px-4 max-w-4xl">
+                    {promo.title && (
+                      <h2 className="text-2xl md:text-4xl lg:text-5xl font-light mb-2 tracking-wide">
+                        {promo.title}
+                      </h2>
+                    )}
+                    {promo.subtitle && (
+                      <p className="text-base md:text-lg lg:text-xl font-light">
+                        {promo.subtitle}
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
+              )}
             </Link>
           ) : (
-            <>
+            <div className="w-full h-full">
               <Image
                 src={promo.image}
                 alt={promo.title}
                 fill
                 className="object-cover"
                 priority
+                sizes="100vw"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
-                <div className="text-center text-white px-4">
-                  <h2 className="text-3xl md:text-5xl font-bold mb-2">{promo.title}</h2>
-                  {promo.subtitle && (
-                    <p className="text-lg md:text-xl">{promo.subtitle}</p>
-                  )}
+              {(promo.title || promo.subtitle) && (
+                <div className="absolute inset-0 flex items-end justify-center pb-12 md:pb-20">
+                  <div className="text-center text-white px-4 max-w-4xl">
+                    {promo.title && (
+                      <h2 className="text-2xl md:text-4xl lg:text-5xl font-light mb-2 tracking-wide">
+                        {promo.title}
+                      </h2>
+                    )}
+                    {promo.subtitle && (
+                      <p className="text-base md:text-lg lg:text-xl font-light">
+                        {promo.subtitle}
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </>
+              )}
+            </div>
           )}
         </div>
       ))}

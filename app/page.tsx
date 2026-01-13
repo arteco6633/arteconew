@@ -9,9 +9,10 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col">
       <Header />
-      {/* Отступ для fixed хэдера (h-20 + h-12 = 128px) */}
-      <div className="pt-[128px]">
-        <PromoBanner />
+      {/* Промо-блок без отступа сверху, так как хэдер fixed */}
+      <PromoBanner />
+      {/* Отступ для остального контента */}
+      <div>
         <Bestsellers />
         <Catalog />
         <Newsletter />
