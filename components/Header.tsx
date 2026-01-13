@@ -46,7 +46,7 @@ export default function Header() {
       style={{ backgroundColor: '#474A51' }}
     >
       {/* Верхняя полоса с логотипом и иконками */}
-      <div className="border-b border-white">
+      <div className="border-b border-white border-opacity-30" style={{ borderWidth: '0.5px' }}>
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Логотип */}
