@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { subscribeToNewsletter as subscribeSupabase } from '@/lib/db'
-import { subscribeToNewsletter as subscribePg } from '@/lib/db-pg'
+import { subscribeToNewsletter } from '@/lib/data'
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,14 +14,7 @@ export async function POST(request: NextRequest) {
     }
 
     try {
-      // Пробуем PostgreSQL, затем Supabase
-      if (process.env.DATABASE_URL) {
-        await subscribePg(email)
-      } else if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
-        await subscribeSupabase(email)
-      } else {
-        console.log('Новая подписка:', email)
-      }
+      await subscribeToNewsletter(email)
       return NextResponse.json({ success: true })
     } catch (error) {
       // Если БД не настроена, просто логируем
