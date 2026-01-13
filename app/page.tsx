@@ -9,11 +9,14 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col">
       <Header />
-      <PromoBanner />
-      <Bestsellers />
-      <Catalog />
-      <Newsletter />
-      <Footer />
+      {/* Отступ для fixed хэдера */}
+      <div className="pt-32">
+        <PromoBanner />
+        <Bestsellers />
+        <Catalog />
+        <Newsletter />
+        <Footer />
+      </div>
     </main>
   )
 }

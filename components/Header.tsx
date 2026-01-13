@@ -1,10 +1,32 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+
+      // Показываем хэдер при скролле вверх или в самом верху
+      if (currentScrollY < lastScrollY || currentScrollY < 10) {
+        setIsVisible(true)
+      } 
+      // Скрываем хэдер при скролле вниз
+      else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false)
+      }
+
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY])
 
   const categories = [
     'Футболки',
@@ -17,11 +39,15 @@ export default function Header() {
   ]
 
   return (
-    <header className="bg-gray-800 text-white w-full">
+    <header 
+      className={`bg-gray-800 text-white w-full fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${
+        isVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}
+    >
       {/* Верхняя полоса с логотипом и иконками */}
       <div className="border-b border-gray-700">
         <div className="w-full px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-14">
+          <div className="flex items-center justify-between h-20">
             {/* Логотип */}
             <Link href="/" className="text-xl font-normal tracking-wide">
               ARTECO
@@ -63,18 +89,10 @@ export default function Header() {
 
       {/* Навигационная панель */}
       <div className="border-b border-gray-700">
-        <div className="w-full px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-12">
-            {/* Локация слева */}
-            <div className="flex items-center space-x-2 min-w-0">
-              <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-              </svg>
-              <span className="text-sm truncate hidden sm:inline">Красногорск</span>
-            </div>
-
+        <div className="w-full px-4 sm:px-6 lg:px-8 relative">
+          <div className="flex items-center justify-center h-12">
             {/* Навигация по центру */}
-            <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6 flex-1 justify-center mx-4">
+            <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6">
               <Link href="/" className="text-sm hover:opacity-70 transition-opacity whitespace-nowrap">
                 Каталог
               </Link>
@@ -89,26 +107,29 @@ export default function Header() {
               ))}
             </nav>
 
-            {/* Телефон справа */}
-            <div className="flex items-center space-x-2 min-w-0">
-              <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-              <a href="tel:80000000000" className="text-sm hover:opacity-70 transition-opacity whitespace-nowrap hidden sm:inline">
-                8 (000) 000-00-00
-              </a>
-            </div>
+            {/* Телефон и мобильное меню справа */}
+            <div className="absolute right-4 sm:right-6 lg:right-8 flex items-center space-x-4">
+              {/* Телефон - скрыт на мобильных */}
+              <div className="hidden sm:flex items-center space-x-2">
+                <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <a href="tel:80000000000" className="text-sm hover:opacity-70 transition-opacity whitespace-nowrap">
+                  8 (000) 000-00-00
+                </a>
+              </div>
 
-            {/* Мобильное меню */}
-            <button
-              className="lg:hidden ml-2 flex-shrink-0"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Меню"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
+              {/* Мобильное меню */}
+              <button
+                className="lg:hidden flex-shrink-0"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Меню"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
