@@ -49,7 +49,7 @@ export default function Header() {
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Логотип */}
-            <Link href="/" className="text-xl font-normal tracking-wide">
+            <Link href="/" className="text-xl font-normal tracking-wide text-white hover:text-white no-underline">
               ARTECO
             </Link>
 
@@ -93,14 +93,14 @@ export default function Header() {
           <div className="flex items-center justify-center h-12">
             {/* Навигация по центру */}
             <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6">
-              <Link href="/" className="text-sm hover:opacity-70 transition-opacity whitespace-nowrap">
+              <Link href="/" className="text-sm text-white hover:opacity-70 transition-opacity whitespace-nowrap no-underline">
                 Каталог
               </Link>
               {categories.map((category) => (
                 <Link
                   key={category}
                   href={`/catalog/${category.toLowerCase()}`}
-                  className="text-sm hover:opacity-70 transition-opacity whitespace-nowrap"
+                  className="text-sm text-white hover:opacity-70 transition-opacity whitespace-nowrap no-underline"
                 >
                   {category}
                 </Link>
@@ -114,9 +114,9 @@ export default function Header() {
                 <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
-                <a href="tel:80000000000" className="text-sm hover:opacity-70 transition-opacity whitespace-nowrap">
-                  8 (000) 000-00-00
-                </a>
+              <a href="tel:80000000000" className="text-sm text-white hover:opacity-70 transition-opacity whitespace-nowrap no-underline">
+                8 (000) 000-00-00
+              </a>
               </div>
 
               {/* Мобильное меню */}
@@ -140,7 +140,7 @@ export default function Header() {
           <div className="px-4 py-4 space-y-3">
             <Link 
               href="/" 
-              className="block text-sm hover:opacity-70 transition-opacity py-2"
+              className="block text-sm text-white hover:opacity-70 transition-opacity py-2 no-underline"
               onClick={() => setIsMenuOpen(false)}
             >
               Каталог
@@ -149,7 +149,7 @@ export default function Header() {
               <Link
                 key={category}
                 href={`/catalog/${category.toLowerCase()}`}
-                className="block text-sm hover:opacity-70 transition-opacity py-2"
+                className="block text-sm text-white hover:opacity-70 transition-opacity py-2 no-underline"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {category}
