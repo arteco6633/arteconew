@@ -2,8 +2,8 @@ module.exports = {
   apps: [
     {
       name: 'arteconew',
-      script: 'npm',
-      args: 'start:prod',
+      script: 'node_modules/.bin/next',
+      args: 'start -H 0.0.0.0 -p 3000',
       cwd: '/var/www/arteconew',
       instances: 1,
       autorestart: true,
