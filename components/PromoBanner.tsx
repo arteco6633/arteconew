@@ -34,7 +34,7 @@ export default function PromoBanner() {
 
   return (
     <section className="w-full">
-      {promoBlocks.map((promo) => (
+      {promoBlocks.map((promo, index) => (
         <div key={promo.id} className="relative w-full h-[70vh] min-h-[600px] max-h-[900px]">
           {promo.link ? (
             <Link href={promo.link} className="block w-full h-full">
